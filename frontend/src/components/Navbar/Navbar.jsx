@@ -1,10 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Clock from "../Clock/Clock";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { GoPerson, GoSettings, GoSignOut } from "react-icons/go";
+import { logout } from "../../features/auth/authSlice";
+import Clock from "../Clock/Clock";
 import "./nav.css";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  });
+
+  const onLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   const now = new Date();
   const todayDate = now.toLocaleDateString("default", {
     year: "numeric",
@@ -17,7 +35,7 @@ function Navbar() {
       <section className='user'>
         <div className='container'>
           <p>Witaj</p>
-          <p>Bartosz</p>
+          <p>{user && user.nickname}</p>
         </div>
       </section>
       <section className='date'>
@@ -44,7 +62,7 @@ function Navbar() {
       </section>
       <section className='logout'>
         <div className='container'>
-          <div className='btn user-logout'>
+          <div className='btn user-logout' onClick={onLogout}>
             <GoSignOut />
             <p>Wyjdź</p>
           </div>

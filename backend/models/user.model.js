@@ -13,10 +13,10 @@ const userSchema = new Schema({
     nickname: {
         type: String, 
         unique: true, 
-        required: [true, 'Nickname jest wymagane']},
+        required: [true, 'Nickname jest wymagany']},
     password: {
         type: String, 
-        required: [true, 'Hasło jest wymagane']},
+        required: [true, 'Hasło jest wymagany']},
 }, {
     timestamps: true
 })

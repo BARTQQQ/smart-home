@@ -17,23 +17,15 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { nickname, password } = req.body;
 
-
-  if (!nickname && userCount > 0) {
-    // Nickname are missing, return an error response
-    res.status(400).json({ errors: ["Nickname jest wymagane"] });
-    return;
-  }
-
-  if (!password && userCount > 0) {
-    // Password and/or password are missing, return an error response
-    res.status(400).json({ errors: ["Hasło jest wymagane"] });
+  if (!nickname || !password) {
+    // Nickname and/or password are missing, return an error response
+    res.status(400).json({ errors: ["Nickname i hasło są wymagane"] });
     return;
   }
 
   try {
     // Create a user object with the given values
     const user = await User.findOne({ nickname })
-    await user.validate();
 
     // Check if the user exists and the password is correct
     if (user && (await bcrypt.compare(password, user.password))) {

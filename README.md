@@ -4,13 +4,13 @@ Frontend:
 
 ```
 npm install
-npm i react-router-dom react-icons
+npm i react-router-dom react-icons http-proxy-middleware @reduxjs/toolkit redux axios react-loading webpack@latest
 ```
 
 Backend:
 
 ```
-npm i nodemon bcryptjs dotenv express jsonwebtoken mongoose
+npm i nodemon bcryptjs dotenv express jsonwebtoken mongoose cors
 ```
 
 ## Endpointy
@@ -23,13 +23,13 @@ Wyświetla informacje konta wymagany jest token
 /api/user/account
 ```
 
-| Parametr            | Typ      | Opis                                                                     |
-| :------------------ | :------- | :----------------------------------------------------------------------- |
-| **TBD**`JWT Bearer` | `string` | **Wymagany**. Dla wszystkich operacji wymagany jest token autentykacyjny |
+| Parametr     | Typ      | Opis                                                                     |
+| :----------- | :------- | :----------------------------------------------------------------------- |
+| `JWT Bearer` | `string` | **Wymagany**. Dla wszystkich operacji wymagany jest token autentykacyjny |
 
 Logowanie
 
-```http
+```yaml
 /api/user
 ```
 

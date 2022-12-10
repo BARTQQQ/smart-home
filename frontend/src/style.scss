@@ -7,6 +7,8 @@ $white: rgb(255, 255, 255);
 $font-color: rgb(116, 112, 131);
 $highlight-color: rgb(126, 87, 194);
 $yt-color: rgb(229, 57, 53);
+$red: rgb(239,68,68);
+$red-hover: rgba(239, 68, 68, 0.7);
 
 //variables
 $opacity: .8;
@@ -110,6 +112,38 @@ div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
             &:hover {
                 background-color: $white;
                 color: $background-color;
+            }
+        }
+
+        .error {
+            display: flex;
+            justify-content: space-between;
+            padding: 1em;
+            margin-bottom: 1em;
+            font-size: .8em;
+            width: 100%;
+            border: 1px solid $red;
+            background: $red-hover;
+            transition: 3s;
+            
+            .error-info,
+            .close-error {
+                opacity: .7;
+            }
+
+            .error-info {
+                display: flex;
+                align-items: center;
+
+                svg {
+                    margin-right: .5rem;
+                }
+            }
+
+            .close-error {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
             }
         }
     }

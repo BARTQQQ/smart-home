@@ -17,6 +17,11 @@ nav section .container {
   place-self: center;
 }
 
+nav section .container .user-logout {
+  display: flex;
+  align-items: center;
+}
+
 nav section .container .btn {
   transition: .3s;
   cursor: pointer;

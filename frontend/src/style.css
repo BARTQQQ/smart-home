@@ -113,6 +113,44 @@ div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
   color: #060b19;
 }
 
+.user-login form .error,
+.user-register form .error {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-size: .8em;
+  width: 100%;
+  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.7);
+  transition: 3s;
+}
+
+.user-login form .error .error-info,
+.user-login form .error .close-error,
+.user-register form .error .error-info,
+.user-register form .error .close-error {
+  opacity: .7;
+}
+
+.user-login form .error .error-info,
+.user-register form .error .error-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-login form .error .error-info svg,
+.user-register form .error .error-info svg {
+  margin-right: .5rem;
+}
+
+.user-login form .error .close-error,
+.user-register form .error .close-error {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .user-login .link,
 .user-register .link {
   margin-top: 1em;
