@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+//colors
+$background-color: rgb(6, 11, 25);
+$border-color: rgba(255, 255, 255, 0.1);
+$white: rgb(255, 255, 255);
+$font-color: rgb(116, 112, 131);
+$highlight-color: rgb(126, 87, 194);
+$yt-color: rgb(229, 57, 53);
+
+//variables
+$opacity: .8;
+$time: .3s;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
+}
+
+div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    color: $white;
+}
+
+#root {
+    height: 100%;
+}
+
+.user-login, 
+.user-register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 1; 
+
+    form {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-content: center;
+        max-width: 300px;
+
+        label[data-type="name"],
+        label[data-type="surrname"] {
+            width: 50% !important;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column-reverse;
+            width: 100%;
+            margin-bottom: 1em;
+            position: relative;
+
+            input,
+            p {
+                color: $font-color;
+                transition: $time;
+
+            }
+
+            p {
+                margin-bottom: .2em;
+            }
+
+            input {
+                width: 100%;
+                padding: 1em;
+                border: none;
+                border: 1px solid $border-color;
+                outline: none;
+                background: none;
+
+                &:focus {
+                    color: $white;
+                    border-color: $white;
+                }
+            }
+
+            input:focus + p {
+                color: $white;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 1em;
+            background: $border-color;
+            color: $font-color;
+            font-weight: 600;
+            border: 1px solid $border-color;
+            transition: $time;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $white;
+                color: $background-color;
+            }
+        }
+    }
+
+    .link {
+        margin-top: 1em;
+        text-align: center;
+        color: $font-color;
+
+        a {
+            color: $font-color;
+            transition: $time;
+
+            &:hover {
+                color: $highlight-color
+            }
+        }
+    }
+}
+  

@@ -1,0 +1,14 @@
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.current-time {
+  font-size: 1.3em;
+}
+
+.current-time span {
+  opacity: 1;
+  animation: blink 1s infinite;
+}

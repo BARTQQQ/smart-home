@@ -1,0 +1,59 @@
+$border-color: rgba(255, 255, 255, 0.1);
+
+nav {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    width: 100vw;
+    min-height: 10vh;
+    border: 1px solid $border-color;
+    border-left: none;
+
+    section {
+        display: grid;
+        place-self: stretch;
+        border-left: 1px solid $border-color;
+
+        .container {
+            place-self: center;
+
+            .btn {
+                transition: .3s;
+                cursor: pointer;
+                
+                &:hover {
+                    opacity: 1;
+                }
+
+                p {
+                    margin-left: .5rem;
+                }
+        
+                a {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .user,
+    .date {
+        justify-self: start;
+        padding-left: 5rem;
+    }
+
+    .date,
+    .btn {
+        opacity: .6;
+    }
+
+    .settings {
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+}
+
