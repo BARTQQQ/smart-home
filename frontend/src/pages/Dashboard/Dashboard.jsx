@@ -1,4 +1,5 @@
 import React from "react";
+import Events from "../../components/Events/Events";
 
 import "./dashboard.css";
 
@@ -9,8 +10,9 @@ function Dashboard() {
       <aside className='things-details'>
         <h2>Details</h2>
       </aside>
-      <aside className='list'>
-        <h2>List</h2>
+      <aside className='event-wrapper'>
+        <Events />
+        <div>Nadchodzące</div>
       </aside>
     </main>
   );

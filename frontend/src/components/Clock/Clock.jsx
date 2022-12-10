@@ -4,7 +4,7 @@ import "./clock.css";
 function Clock() {
   const [time, setTime] = useState(new Date());
 
-  const currentHour = time.getHours();
+  const currentHour = String(time.getHours()).padStart(2, "0");
   const currentMinute = String(time.getMinutes()).padStart(2, "0");
 
   useEffect(() => {

@@ -37,6 +37,23 @@ div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
 
 #root {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    padding: 1em;
+    background: $border-color;
+    color: $font-color;
+    font-weight: 600;
+    border: 1px solid $border-color;
+    transition: $time;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $white;
+        color: $background-color;
+    }
 }
 
 .user-login, 
@@ -101,18 +118,6 @@ div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
 
         button {
             width: 100%;
-            padding: 1em;
-            background: $border-color;
-            color: $font-color;
-            font-weight: 600;
-            border: 1px solid $border-color;
-            transition: $time;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $white;
-                color: $background-color;
-            }
         }
 
         .error {
@@ -162,5 +167,14 @@ div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
             }
         }
     }
+}
+
+.settings-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+   
 }
   

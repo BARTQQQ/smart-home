@@ -17,7 +17,10 @@ main {
         grid-area: 1 / 2 / 2 / 3; 
     }
 
-    .list { 
-        grid-area: 2 / 2 / 3 / 3; 
+    .event-wrapper { 
+        border-top: 1px solid $border-color;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
     }
 }

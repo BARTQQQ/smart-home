@@ -17,7 +17,7 @@ npm i nodemon bcryptjs dotenv express jsonwebtoken mongoose cors
 
 ### User:
 
-Wyświetla informacje konta wymagany jest token
+Wyświetla informacje konta
 
 ```http
 /api/user/account
