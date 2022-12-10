@@ -29,7 +29,7 @@ Wyświetla informacje konta wymagany jest token
 
 Logowanie
 
-```yaml
+```http
 /api/user
 ```
 
