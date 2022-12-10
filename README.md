@@ -33,6 +33,11 @@ Logowanie
 /api/user
 ```
 
+| Parametr   | Typ   | Opis                      |
+| :--------- | :---- | :------------------------ |
+| `nickname` | `int` | **Wymagane**. Nazwa konta |
+| `password` | `int` | **Wymagane**. Hasło       |
+
 ## Available Scripts
 
 In the project directory, you can run:
