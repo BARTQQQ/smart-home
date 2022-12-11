@@ -20,7 +20,7 @@ npm i nodemon bcryptjs dotenv express jsonwebtoken mongoose cors
 Wyświetla informacje konta
 
 ```http
-/api/user/account
+GET: /api/user/account
 ```
 
 | Parametr     | Typ      | Opis                                                                     |
@@ -30,13 +30,32 @@ Wyświetla informacje konta
 Logowanie
 
 ```http
-/api/user
+POST: /api/user
 ```
 
-| Parametr   | Typ   | Opis                      |
-| :--------- | :---- | :------------------------ |
-| `nickname` | `int` | **Wymagane**. Nazwa konta |
-| `password` | `int` | **Wymagane**. Hasło       |
+| Parametr   | Typ      | Opis                      |
+| :--------- | :------- | :------------------------ |
+| `nickname` | `String` | **Wymagane**. Nazwa konta |
+| `password` | `String` | **Wymagane**. Hasło       |
+
+### Event:
+
+```http
+GET: /api/event
+```
+
+```http
+POST: /api/user
+```
+
+| Parametr   | Typ      | Opis  |
+| :--------- | :------- | :---- |
+| `contents` | `String` | Treść |
+| `date`     | `String` | Data  |
+
+```http
+DELETE: /api/user/:id
+```
 
 ## Available Scripts
 
