@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const port = process.env.PORT
 const app = express();
@@ -15,24 +16,19 @@ const connect = async () => {
     }
 }
 
-
 connect()
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
-  
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/user', require('./routes/user.route'))
-// app.use('/api/group', require('./routes/group.route'))
-// app.use('/api/event', require('./routes/event.route'))
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}))
 
+app.use('/api/user', require('./routes/user.route'))
+app.use('/api/event', require('./routes/event.route'))
 
 app.listen(port, () => console.log(`Server started on port ${port}`))

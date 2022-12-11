@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../features/auth/authSlice";
@@ -70,7 +69,6 @@ function Login() {
             name='nickname'
             value={nickname}
             onChange={onChange}
-            required
           />
           <p>Nickname</p>
         </label>
@@ -81,7 +79,6 @@ function Login() {
             name='password'
             value={password}
             onChange={onChange}
-            required
           />
           <p>Hasło</p>
         </label>

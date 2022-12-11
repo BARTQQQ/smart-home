@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Register() {
+function CreateUser() {
   return (
-    <main className='user-register'>
+    <main className='user-create'>
       <form>
         <label htmlFor='name' data-type='name'>
           <input type='text' id='name' name='name' required />
@@ -25,7 +25,7 @@ function Register() {
           <input type='password' id='password2' name='password2' required />
           <p>Confirm password</p>
         </label>
-        <button type='submit'>Register</button>
+        <button type='submit'>CreateUser</button>
       </form>
       <p className='link'>
         Have an accout? <Link to='/login'>login</Link>
@@ -34,4 +34,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default CreateUser;

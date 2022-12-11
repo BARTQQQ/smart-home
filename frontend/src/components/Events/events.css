@@ -1,9 +1,10 @@
 .events {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: .5fr 35px 4fr 50px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  min-height: 0;
 }
 
 .events .select-month {
@@ -43,19 +44,55 @@
   margin: 0.3rem;
 }
 
+.events .weekday {
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-self: stretch;
+}
+
+.events .weekday .day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.events .weekday .selected {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: none;
+}
+
 .events .events-list {
-  grid-area: 2 / 1 / 6 / 2;
+  grid-area: 3 / 1 / 4 / 2;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  overflow-y: scroll;
 }
 
 .events .events-create {
-  grid-area: 6 / 1 / 7 / 2;
+  grid-area: 4 / 1 / 5 / 2;
   place-self: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.events .events-create input {
+  width: 85%;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 1rem;
 }
 
 .events .events-create button {
-  width: 100%;
-  height: 100%;
+  width: 15%;
+  border: none;
+  display: grid;
+}
+
+.events .events-create button svg {
+  place-self: center;
 }

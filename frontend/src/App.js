@@ -6,7 +6,7 @@ import {
 import { useSelector } from "react-redux";
 import Navbar from "../src/components/Navbar/Navbar";
 import Login from './pages/Login/Login'
-import Register from './pages/Register/Register'
+// import Register from './pages/Register/Register'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Profile from './pages/Profile/Profile'
 import Settings from './pages/Settings/Settings'
@@ -33,7 +33,7 @@ function App() {
             <Route path="/profile" element={<><Navbar /><Profile/></>}/>
             <Route path="/settings" element={<><Navbar /><Settings/></>}/>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/>
+            {/* <Route path="/register" element={<Register/>}/> */}
         </Routes>
     </Router>
   );

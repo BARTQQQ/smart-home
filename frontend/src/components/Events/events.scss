@@ -3,9 +3,10 @@ $border-color: rgba(255, 255, 255, 0.1);
 .events {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: .5fr 35px 4fr 50px;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    min-height: 0;
 
     .select-month {
         grid-area: header;
@@ -44,21 +45,56 @@ $border-color: rgba(255, 255, 255, 0.1);
         }
     }
 
+    .weekday {
+        grid-area: 2 / 1 / 3 / 2;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        align-self: stretch;
+
+        .day {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $border-color;
+        }
+
+        .selected {
+            border: 1px solid $border-color;
+            background: none;
+        }
+    }
+
     .events-list {
-        grid-area: 2 / 1 / 6 / 2;
+        grid-area: 3 / 1 / 4 / 2;
         border-left: 1px solid $border-color;
         border-right: 1px solid $border-color;
-        border-top: 1px solid $border-color;
-
+        padding: 1rem;
+        overflow-y: scroll;
     }
 
     .events-create {
-        grid-area: 6 / 1 / 7 / 2;
+        grid-area: 4 / 1 / 5 / 2;;
         place-self: stretch;
+        border: 1px solid $border-color;
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            width: 85%;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 1rem;
+        }
 
         button {
-            width: 100%;
-            height: 100%;
+            width: 15%;
+            border: none;
+            display: grid; 
+            
+            svg {
+                place-self: center;
+            }
         }
     }
 }
