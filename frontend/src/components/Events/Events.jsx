@@ -18,9 +18,11 @@ function Events() {
 
   const date = current.toLocaleDateString("default", {
     year: "numeric",
-    month: "numeric",
-    day: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   });
+
+  console.log(date);
 
   let weekDays = [];
   let selectWeek = current.getDay();

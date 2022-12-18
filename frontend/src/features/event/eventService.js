@@ -1,7 +1,7 @@
 import axios from 'axios'
-import api from '../../proxies'
+// import api from '../../proxies'
 
-const API_URL = api.PROXY_1 + '/event/'
+const API_URL = '/api/event/'
 
 const getEvents = async (token) => {
     const config = {

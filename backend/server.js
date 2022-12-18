@@ -22,11 +22,11 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}))
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+// }))
 
 app.use('/api/user', require('./routes/user.route'))
 app.use('/api/event', require('./routes/event.route'))

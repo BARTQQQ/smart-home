@@ -1,7 +1,7 @@
 import axios from 'axios'
-import api from '../../proxies'
+// import api from '../../proxies'
 
-const API_URL = api.PROXY_1 + '/user/'
+const API_URL = '/api/user/'
 
 const login = async (userData) => {
     const response = await axios.post(API_URL, userData)
