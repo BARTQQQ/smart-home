@@ -7,6 +7,13 @@ function Clock() {
   const currentHour = String(time.getHours()).padStart(2, "0");
   const currentMinute = String(time.getMinutes()).padStart(2, "0");
 
+  const now = new Date();
+  const todayDate = now.toLocaleDateString("default", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
 
@@ -16,10 +23,13 @@ function Clock() {
   }, []);
 
   return (
-    <div className='current-time'>
-      {currentHour}
-      <span>:</span>
-      {currentMinute}
+    <div className='clock'>
+      <div className='current-time'>
+        {currentHour}
+        <span>:</span>
+        {currentMinute}
+      </div>
+      <div className='today-date'>{todayDate}</div>
     </div>
   );
 }

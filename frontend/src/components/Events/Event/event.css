@@ -2,15 +2,16 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .event .event-content {
-  flex: 1;
   padding: .7rem;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.1);
+  width: 85%;
 }
 
 .event .event-content span {
@@ -18,5 +19,10 @@
 }
 
 .event .event-content p {
+  overflow-wrap: break-word;
   opacity: .5;
+}
+
+.event .delete {
+  width: 15%;
 }

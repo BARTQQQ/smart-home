@@ -4,15 +4,16 @@ $border-color: rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+    width: 100%;
 
 
     .event-content {
-        flex: 1;
         padding: .7rem;
         border-left: 1px solid $border-color;
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
         background: $border-color;
+        width: 85%;
 
         span {
             font-weight: 600;
@@ -20,7 +21,12 @@ $border-color: rgba(255, 255, 255, 0.1);
         }
 
         p {
+            overflow-wrap: break-word;
             opacity: .5;
         }
+    }
+
+    .delete {
+        width: 15%;
     }
 }

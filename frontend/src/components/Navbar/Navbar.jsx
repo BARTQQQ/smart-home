@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { GoPerson, GoSettings, GoSignOut } from "react-icons/go";
+import { GoHome, GoPerson, GoSettings, GoSignOut } from "react-icons/go";
 import { logout } from "../../features/auth/authSlice";
 import Clock from "../Clock/Clock";
+import Weather from "../Weather/Weather";
 import "./nav.css";
 
 function Navbar() {
@@ -23,13 +24,6 @@ function Navbar() {
     navigate("/");
   };
 
-  const now = new Date();
-  const todayDate = now.toLocaleDateString("default", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
   return (
     <nav>
       <section className='user'>
@@ -38,22 +32,26 @@ function Navbar() {
           <p>{user && user.nickname}</p>
         </div>
       </section>
-      <section className='date'>
-        <div className='container'>
-          <Clock />
-          <div className='today-date'>{todayDate}</div>
-        </div>
+      <section className='date-weather'>
+        <Clock />
+        <Weather />
       </section>
       <section className='settings'>
         <div className='container'>
+          <div className='btn panel'>
+            <Link to='/'>
+              <GoHome />
+              <p>Panel</p>
+            </Link>
+          </div>
           <div className='btn user-setting'>
-            <Link to='/profile'>
+            <Link to='/profil'>
               <GoPerson />
               <p>Profil</p>
             </Link>
           </div>
           <div className='btn app-setting'>
-            <Link to='/settings'>
+            <Link to='/opcje'>
               <GoSettings />
               <p>Opcje</p>
             </Link>

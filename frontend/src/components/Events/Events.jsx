@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoChevronLeft, GoChevronRight, GoPin } from "react-icons/go";
 import { createEvent } from "../../features/event/eventSlice";
+import ReactLoading from "react-loading";
 import Event from "./Event/Event";
 import "./events.css";
 
@@ -21,8 +22,6 @@ function Events() {
     month: "2-digit",
     day: "2-digit",
   });
-
-  console.log(date);
 
   let weekDays = [];
   let selectWeek = current.getDay();
@@ -92,23 +91,31 @@ function Events() {
         })}
       </section>
       <section className='events-list'>
-        {state === "succeeded"
-          ? events.map((event, id) => {
+        {state === "succeeded" ? (
+          events.filter((event) => event.date.toString() === date).length >
+          0 ? (
+            events.map((event, id) => {
               if (event.date.toString() === date) {
                 return <Event key={id} data={event} />;
-              } else {
-                return "";
               }
             })
-          : "loading..."}
+          ) : (
+            <div className='empty'>Brak notatek na dzisiaj</div>
+          )
+        ) : (
+          <div class='loading'>
+            <ReactLoading className='loading' type='bubbles' color='#cfcfcf' />
+          </div>
+        )}
       </section>
       <section className='events-create'>
-        <input
+        <textarea
           type='text'
           className='text'
           id='contents'
           name='contents'
           value={contents}
+          placeholder='Aa'
           onChange={onChange}
         />
         <button onClick={onSubmit}>

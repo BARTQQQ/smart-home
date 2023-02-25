@@ -30,8 +30,8 @@ function App() {
     <Router>
         <Routes>
             <Route path="/" element={state === 'loading' ? <ReactLoading className='loading' type="bubbles" color="#fff" /> : <><Navbar /><Dashboard/></>}/>
-            <Route path="/profile" element={<><Navbar /><Profile/></>}/>
-            <Route path="/settings" element={<><Navbar /><Settings/></>}/>
+            <Route path="/profil" element={<><Navbar /><Profile/></>}/>
+            <Route path="/opcje" element={<><Navbar /><Settings/></>}/>
             <Route path="/login" element={<Login/>}/>
             {/* <Route path="/register" element={<Register/>}/> */}
         </Routes>

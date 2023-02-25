@@ -4,7 +4,7 @@ nav {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr 1fr;
     width: 100vw;
-    min-height: 10vh;
+    min-height: 15vh;
     border: 1px solid $border-color;
     border-left: none;
 
@@ -42,13 +42,24 @@ nav {
         }
     }
 
-    .user,
-    .date {
-        justify-self: start;
-        padding-left: 5rem;
+    .date-weather {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .date,
+    .user,
+    .date-weather {
+        justify-self: start;
+        padding: 1em;
+    }
+
+    .user {
+        padding-left: 3rem;
+    }
+
+    .date-weather,
     .btn {
         opacity: .6;
     }
