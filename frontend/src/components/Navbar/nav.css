@@ -2,7 +2,7 @@ nav {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 1fr;
   width: 100vw;
-  min-height: 10vh;
+  min-height: 15vh;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: none;
 }
@@ -41,13 +41,24 @@ nav section .container .btn a {
   text-decoration: none;
 }
 
-nav .user,
-nav .date {
-  justify-self: start;
-  padding-left: 5rem;
+nav .date-weather {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav .date,
+nav .user,
+nav .date-weather {
+  justify-self: start;
+  padding: 1em;
+}
+
+nav .user {
+  padding-left: 3rem;
+}
+
+nav .date-weather,
 nav .btn {
   opacity: .6;
 }

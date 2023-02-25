@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../features/auth/authSlice";
-import { GoInfo, GoX } from "react-icons/go";
+import Error from "../../components/Error/Error";
 // import ReactLoading from "react-loading";
 
 function Login() {
@@ -18,7 +18,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const { user, state, error } = useSelector((state) => state.auth);
-
+  console.log(state, displayError);
   useEffect(() => {
     if (state === "error") {
       setDisplayError(true);
@@ -70,7 +70,7 @@ function Login() {
             value={nickname}
             onChange={onChange}
           />
-          <p>Nickname</p>
+          <p>Nazwa konta</p>
         </label>
         <label htmlFor='password'>
           <input
@@ -82,20 +82,8 @@ function Login() {
           />
           <p>Hasło</p>
         </label>
-        {displayError ? (
-          <div className='error'>
-            <div className='error-info'>
-              <GoInfo />
-              {message}
-            </div>
-            <span className='close-error' onClick={onClose}>
-              <GoX />
-            </span>
-          </div>
-        ) : (
-          ""
-        )}
-        <button type='submit'>Login</button>
+        <Error message={message} display={displayError} onClose={onClose} />
+        <button type='submit'>Zaloguj</button>
       </form>
     </main>
   );

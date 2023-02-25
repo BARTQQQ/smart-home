@@ -33,7 +33,7 @@ body {
     overflow: hidden;
 }
 
-div, h1, h2, h3, a, p, span, label, input, button, ::before, ::after {
+div, h1, h2, h3, a, p, span, label, input, button, textarea, ::before, ::after {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 400;
     color: $white;
@@ -175,10 +175,143 @@ button {
 
 .settings-layout {
     display: flex;
+    padding: 1em;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    align-self: center;
+    overflow-y: scroll;
     flex: 1;
-   
+    max-width: 600px;
+
+    .forms {
+        display: flex;
+        flex-direction: column;
+        // height: 100%;
+        width: 100%;
+
+        form {
+            display: flex;
+            margin: .5em 0 2em 0;
+            // justify-content: center;
+            flex-wrap: wrap;
+            align-content: space-between;
+    
+            label[data-type="name"],
+            label[data-type="surrname"] {
+                width: 50% !important;
+            }
+    
+            label {
+                display: flex;
+                flex-direction: column-reverse;
+                width: 100%;
+                margin-bottom: 1em;
+                position: relative;
+    
+                input,
+                p {
+                    color: $font-color;
+                    transition: $time;
+                }
+    
+                p {
+
+                    font-size: 1em;
+                    margin-bottom: .2em;
+                }
+    
+                input {
+                    width: 100%;
+                    padding: 1em;
+                    border: none;
+                    border: 1px solid $border-color;
+                    outline: none;
+                    background: none;
+    
+                    &:focus {
+                        color: $white;
+                        border-color: $white;
+                    }
+                }
+    
+                input:focus + p {
+                    color: $white;
+                }
+            }
+    
+            button {
+                padding: 1em 2em;
+                // width: 50%;
+            }
+
+            .error {
+                display: flex;
+                justify-content: space-between;
+                padding: 1em;
+                margin-bottom: 1em;
+                font-size: .8em;
+                width: 100%;
+                border: 1px solid $red;
+                background: $red-hover;
+                transition: 3s;
+                
+                .error-info,
+                .close-error {
+                    opacity: .7;
+                }
+    
+                .error-info {
+                    display: flex;
+                    align-items: center;
+    
+                    svg {
+                        margin-right: .5rem;
+                    }
+                }
+    
+                .close-error {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        width: 100%;
+
+        button {
+            width: 100%;
+        }
+    }
 }
   
+
+@media screen and (max-width: 992px) {
+    main {
+        display: grid;
+        grid-template-columns: 0;
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+
+        .things-details {
+            grid-area: 1 / 1 / 2 / 3;
+        }
+    }
+}
+
+@media screen and (max-width: 980px) {
+    main {
+        .event-wrapper {
+            grid-area: 2 / 1 / 3 / 3;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(2, 1fr);
+            min-height: auto;
+        }
+    }
+}
