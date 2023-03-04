@@ -16,7 +16,15 @@ const userSchema = new Schema({
         required: [true, 'Nickname jest wymagany']},
     password: {
         type: String, 
-        required: [true, 'Hasło jest wymagany']},
+        required: [true, 'Hasło jest wymagane']},
+    email: {
+        type: String,
+        unique: true,
+        required: [true, 'Email jest wymagany']},
+    confirmedEmail: {
+        type: Boolean,
+        default: false,
+        required: true}
 }, {
     timestamps: true
 })
@@ -32,7 +40,7 @@ const createAdmin = async () => {
     try {
         if (userCount === 0) {
             // No users exist, create a new user with the username "admin" and password "admin"
-            await User.create({ nickname: "admin", password: hash });
+            await User.create({ nickname: "admin", password: hash, email: "admin", confirmedEmail: true });
         }
     } catch(err) {
         console.log(err)

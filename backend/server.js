@@ -25,15 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/user', require('./routes/user.route'))
 app.use('/api/event', require('./routes/event.route'))
-<<<<<<< HEAD
-app.use('/api/raspberry', require('./routes/raspberry.route'))
+app.use('/api/city', require('./routes/city.route'))
+app.use('/api/device', require('./routes/device.route'))
+// app.use('/api/raspberry', require('./routes/raspberry.route'))
 
 const server = app.listen(port, () => console.log(`Server started on port ${port}`))
-const io = socket(server)
-=======
-app.use('/api/city', require('./routes/city.route'))
->>>>>>> 45f7a4694288168c152db6af1e18168c5e979da6
+// const io = socket(server)
 
-io.on('connection', (socket) =>{
-    console.log('Socket connection ID: ', socket.id)
-})
+// io.on('connection', (socket) =>{
+//     console.log('Socket connection ID: ', socket.id)
+// })
