@@ -18,7 +18,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const { user, state, error } = useSelector((state) => state.auth);
-  console.log(state, displayError);
+  // console.log(state, displayError);
   useEffect(() => {
     if (state === "error") {
       setDisplayError(true);
@@ -27,7 +27,6 @@ function Login() {
     if (state === "suceeded" || user) {
       navigate("/");
     }
-
     // dispatch(reset());
   }, [user, error, state, navigate, dispatch]);
 
@@ -56,7 +55,7 @@ function Login() {
   let message;
 
   if (state === "error") {
-    message = <div>{error[0]}</div>;
+    message = <div>{error}</div>;
   }
 
   return (

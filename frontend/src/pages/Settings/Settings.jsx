@@ -1,122 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { updateCity } from "../../features/city/citySlice";
-import Error from "../../components/Error/Error";
-import { getCity } from "../../features/city/citySlice";
-
-function WeatherForm() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { status } = useSelector((state) => state.weather);
-  const { city } = useSelector((state) => state.city);
-
-  const [displayError, setDisplayError] = useState(false);
-  const [localCity, setLocalCity] = useState(city.city);
-
-  const inputChange = (e) => {
-    setLocalCity(e.target.value);
-  };
-
-  const setCity = (e) => {
-    e.preventDefault();
-    dispatch(updateCity({ city: localCity }));
-    setDisplayError(false);
-  };
-
-  const onClose = () => {
-    setDisplayError(false);
-  };
-
-  let message;
-
-  if (status === "Rejected") {
-    message = <div>Błędna nazwa miasta</div>;
-  }
-
-  return (
-    <form onSubmit={setCity}>
-      <label htmlFor='city'>
-        <input
-          type='text'
-          id='city'
-          name='city'
-          placeholder='Miasto'
-          value={localCity}
-          onChange={inputChange}
-        />
-        <p>Podaj nazwę miasta</p>
-      </label>
-      <Error message={message} display={displayError} onClose={onClose} />
-      <button type='submit'>Zapisz</button>
-    </form>
-  );
-}
-
-function DeviceForm() {
-  return (
-    <form>
-      <label htmlFor='nickname'>
-        <input
-          type='text'
-          id='nickname'
-          name='nickname'
-          placeholder='GPIO pin'
-          // value={nickname}
-          // onChange={onChange}
-        />
-        <p>Podaj numer pinu GPIO</p>
-      </label>
-      <label htmlFor='nickname'>
-        <input
-          type='text'
-          id='nickname'
-          name='nickname'
-          placeholder='Nazwa'
-          // value={nickname}
-          // onChange={onChange}
-        />
-        <p>Podaj nazwe urządzenia</p>
-      </label>
-      <label htmlFor='nickname'>
-        <input
-          type='text'
-          id='nickname'
-          name='nickname'
-          placeholder='Nazwa pomieszczenie'
-          // value={nickname}
-          // onChange={onChange}
-        />
-        <p>Pomieszczenie urządzenia</p>
-      </label>
-      <button type='submit'>Dodaj</button>
-    </form>
-  );
-}
-
-function DeleteDeviceForm() {
-  return (
-    <form>
-      <label htmlFor='nickname'>
-        <input
-          type='text'
-          id='nickname'
-          name='nickname'
-          placeholder='GPIO pin'
-          // value={nickname}
-          // onChange={onChange}
-        />
-        <p>Podaj numer pinu GPIO</p>
-      </label>
-      <button type='submit'>Usuń</button>
-    </form>
-  );
-}
+import { TbLamp, TbLampOff } from "react-icons/tb";
+import { BsCloudSunFill } from "react-icons/bs";
+import { MdDriveFileRenameOutline } from "react-icons/md";
+import { MdPersonAdd, MdPersonRemove } from "react-icons/md";
 
 function Settings() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const goBack = () => {
     navigate("/");
@@ -125,16 +17,53 @@ function Settings() {
   return (
     <section className='settings-layout'>
       <div className='forms'>
-        <h2>Nowe urządzenie (włącz/wyłącz)</h2>
-        <DeviceForm />
-        <h2>Usuń urządzenie</h2>
-        <DeleteDeviceForm />
-        <h2>Ustawienia pogody</h2>
-        <WeatherForm />
+        <h2>Panel administratora</h2>
+        <div className='form-links'>
+          <span className='link-to-form'>
+            <Link to='/opcje/ustawienia/dodaj-uzytkownika'>
+              Nowy użytkownik
+              <MdPersonAdd />
+            </Link>
+          </span>
+          <span className='link-to-form'>
+            <Link to='/opcje/ustawienia/usun-uzytkownika'>
+              Usuń użytkownika
+              <MdPersonRemove />
+            </Link>
+          </span>
+          <span className='link-to-form'>
+            <Link to='/opcje/ustawienia/dodaj'>
+              Dodaj
+              <TbLamp />
+            </Link>
+          </span>
+          <span className='link-to-form'>
+            <Link to='/opcje/ustawienia/usun'>
+              Usuń
+              <TbLampOff />
+            </Link>
+          </span>
+          <span className='link-to-form'>
+            <Link to='/opcje/ustawienia/pogoda'>
+              Pogoda
+              <BsCloudSunFill />
+            </Link>
+          </span>
+        </div>
+        <h2>Profil</h2>
+        <div className='form-links'>
+          <span className='link-to-form'>
+            <Link to='/opcje/profil/nazwa'>
+              Edycja konta
+              <MdDriveFileRenameOutline />
+            </Link>
+          </span>
+          <span className='link-to-form'>
+            <Link to='/opcje/usun'>Profilowe</Link>
+          </span>
+        </div>
         <div className='buttons'>
-          <button className='goback' onClick={goBack}>
-            Wróć
-          </button>
+          <button onClick={goBack}>Wróć</button>
         </div>
       </div>
     </section>

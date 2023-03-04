@@ -11,7 +11,7 @@ function Profile() {
   };
 
   return (
-    <section className='settings-layout'>
+    <section className='form-layout'>
       <div className='forms'>
         <h2>Zmień nazwę konta</h2>
         <form>

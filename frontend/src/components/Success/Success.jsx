@@ -1,13 +1,13 @@
 import React from "react";
-import { GoAlert, GoX } from "react-icons/go";
+import { GoCheck, GoX } from "react-icons/go";
 
-function Error({ display, message, onClose }) {
+function Success({ display, message, onClose }) {
   return (
     <>
       {display && (
-        <div className='error'>
+        <div className='success'>
           <div className='info'>
-            <GoAlert />
+            <GoCheck />
             {message}
           </div>
           <span className='close' onClick={onClose}>
@@ -19,4 +19,4 @@ function Error({ display, message, onClose }) {
   );
 }
 
-export default Error;
+export default Success;

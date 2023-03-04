@@ -121,44 +121,6 @@ button:hover {
   width: 100%;
 }
 
-.user-login form .error,
-.user-create form .error {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  margin-bottom: 1em;
-  font-size: .8em;
-  width: 100%;
-  border: 1px solid #ef4444;
-  background: rgba(239, 68, 68, 0.7);
-  transition: 3s;
-}
-
-.user-login form .error .error-info,
-.user-login form .error .close-error,
-.user-create form .error .error-info,
-.user-create form .error .close-error {
-  opacity: .7;
-}
-
-.user-login form .error .error-info,
-.user-create form .error .error-info {
-  display: flex;
-  align-items: center;
-}
-
-.user-login form .error .error-info svg,
-.user-create form .error .error-info svg {
-  margin-right: .5rem;
-}
-
-.user-login form .error .close-error,
-.user-create form .error .close-error {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
 .user-login .link,
 .user-create .link {
   margin-top: 1em;
@@ -177,7 +139,7 @@ button:hover {
   color: #7e57c2;
 }
 
-.settings-layout {
+.form-layout {
   display: flex;
   padding: 1em;
   flex-direction: column;
@@ -185,28 +147,22 @@ button:hover {
   align-self: center;
   overflow-y: scroll;
   flex: 1;
+}
+
+.form-layout form {
   max-width: 600px;
-}
-
-.settings-layout .forms {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.settings-layout .forms form {
   display: flex;
   margin: .5em 0 2em 0;
   flex-wrap: wrap;
   align-content: space-between;
 }
 
-.settings-layout .forms form label[data-type="name"],
-.settings-layout .forms form label[data-type="surrname"] {
+.form-layout form label[data-type="name"],
+.form-layout form label[data-type="surrname"] {
   width: 50% !important;
 }
 
-.settings-layout .forms form label {
+.form-layout form label {
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
@@ -214,18 +170,18 @@ button:hover {
   position: relative;
 }
 
-.settings-layout .forms form label input,
-.settings-layout .forms form label p {
+.form-layout form label input,
+.form-layout form label p {
   color: #747083;
   transition: 0.3s;
 }
 
-.settings-layout .forms form label p {
+.form-layout form label p {
   font-size: 1em;
   margin-bottom: .2em;
 }
 
-.settings-layout .forms form label input {
+.form-layout form label input {
   width: 100%;
   padding: 1em;
   border: none;
@@ -234,49 +190,68 @@ button:hover {
   background: none;
 }
 
-.settings-layout .forms form label input:focus {
+.form-layout form label input:focus {
   color: white;
   border-color: white;
 }
 
-.settings-layout .forms form label input:focus + p {
+.form-layout form label input:focus + p {
   color: white;
 }
 
-.settings-layout .forms form button {
+.form-layout form button {
   padding: 1em 2em;
 }
 
-.settings-layout .forms form .error {
+.settings-layout .forms {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 1em;
-  margin-bottom: 1em;
-  font-size: .8em;
   width: 100%;
-  border: 1px solid #ef4444;
-  background: rgba(239, 68, 68, 0.7);
-  transition: 3s;
 }
 
-.settings-layout .forms form .error .error-info,
-.settings-layout .forms form .error .close-error {
-  opacity: .7;
-}
-
-.settings-layout .forms form .error .error-info {
+.settings-layout .forms .form-links {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
-.settings-layout .forms form .error .error-info svg {
-  margin-right: .5rem;
-}
-
-.settings-layout .forms form .error .close-error {
-  display: flex;
-  align-items: center;
+.settings-layout .forms .form-links .link-to-form {
+  height: 10em;
+  width: 10em;
+  margin: 1em 1em 1em 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #747083;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
   cursor: pointer;
+}
+
+.settings-layout .forms .form-links .link-to-form:hover {
+  background-color: white;
+}
+
+.settings-layout .forms .form-links .link-to-form:hover > a {
+  color: #060b19;
+}
+
+.settings-layout .forms .form-links .link-to-form a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #747083;
+  transition: 0.3s;
+}
+
+.settings-layout .forms .form-links .link-to-form a svg {
+  width: 3em;
+  height: 3em;
+  margin-bottom: 1em;
 }
 
 .settings-layout .buttons {
@@ -286,6 +261,98 @@ button:hover {
 
 .settings-layout .buttons button {
   width: 100%;
+}
+
+.email-verify {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.email-verify .email-content {
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.email-verify .email-content .email-info {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  color: white;
+}
+
+.error {
+  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.7);
+}
+
+.success {
+  border: 1px solid #44871e;
+  background: rgba(82, 161, 35, 0.7);
+}
+
+.error,
+.success {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-size: .8em;
+  width: 100%;
+}
+
+.error .info,
+.error .close,
+.success .info,
+.success .close {
+  opacity: .7;
+}
+
+.error .info,
+.success .info {
+  display: flex;
+  align-items: center;
+}
+
+.error .info svg,
+.success .info svg {
+  margin-right: .5rem;
+}
+
+.error .close,
+.success .close {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.not-found div span {
+  color: #747083;
+  font-size: 15vh;
+  display: inline-block;
+  line-height: 12vh;
+  height: 12vh;
+}
+
+.not-found div p {
+  color: #747083;
+  font-size: 3vh;
+}
+
+.not-found button {
+  margin-top: 5em;
 }
 
 @media screen and (max-width: 992px) {

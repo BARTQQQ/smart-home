@@ -2,7 +2,7 @@ $border-color: rgba(255, 255, 255, 0.1);
 
 nav {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
     width: 100vw;
     min-height: 15vh;
     border: 1px solid $border-color;
@@ -52,7 +52,7 @@ nav {
     .user,
     .date-weather {
         justify-self: start;
-        padding: 1em;
+        padding: 1em 2em;
     }
 
     .user {

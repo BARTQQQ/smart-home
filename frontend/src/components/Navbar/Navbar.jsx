@@ -44,12 +44,6 @@ function Navbar() {
               <p>Panel</p>
             </Link>
           </div>
-          <div className='btn user-setting'>
-            <Link to='/profil'>
-              <GoPerson />
-              <p>Profil</p>
-            </Link>
-          </div>
           <div className='btn app-setting'>
             <Link to='/opcje'>
               <GoSettings />
