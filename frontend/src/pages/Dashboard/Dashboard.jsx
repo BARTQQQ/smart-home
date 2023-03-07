@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getEvents } from "../../features/event/eventSlice";
+import { getDevices } from "../../features/device/deviceSlice";
 import Events from "../../components/Events/Events";
 // import GroupedEvents from "../../components/Events/GroupedEvents/GroupedEvents";
 import Event from "../../components/Events/Event/Event";
@@ -8,12 +9,15 @@ import Event from "../../components/Events/Event/Event";
 import ReactLoading from "react-loading";
 
 import "./dashboard.css";
+import Thing from "../../components/Thing/Thing";
 
 function Dashboard() {
   const dispatch = useDispatch();
 
   const { events, state } = useSelector((state) => state.event);
+  const { devices } = useSelector((state) => state.device);
   const [sortOrder, setSortOrder] = useState("desc");
+  console.log(devices);
 
   const sortedEvents = [...events].sort((a, b) => {
     const dateA = new Date(a.date.split(".").reverse().join("-"));
@@ -41,12 +45,25 @@ function Dashboard() {
   };
 
   useEffect(() => {
+    dispatch(getDevices());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getEvents());
   }, [dispatch]);
 
   return (
     <main>
-      <section className='things'></section>
+      <section className='things'>
+        {devices.map((device) => (
+          <Thing
+            key={device._id}
+            dusk={device.dusk}
+            name={device.name}
+            state={device.state}
+          />
+        ))}
+      </section>
       <aside className='things-details'>
         <h2>Details</h2>
       </aside>

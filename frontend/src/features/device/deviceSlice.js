@@ -43,7 +43,13 @@ export const deleteDevice = createAsyncThunk('device/deleteDevice',  async (id, 
 export const deviceSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        reset: (state) => {
+            state.error = null
+            state.success = null
+            state.state = 'idle'
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getDevices.pending, (state) => {
@@ -84,4 +90,5 @@ export const deviceSlice = createSlice({
     }
 })
 
+export const {reset} = deviceSlice.actions
 export default deviceSlice.reducer

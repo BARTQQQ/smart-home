@@ -62,7 +62,6 @@ export const getUsers = createAsyncThunk('auth/users', async (_, thunkAPI) => {
         return await authService.getUsers(token)
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message)
-        console.log(error.message)
         return thunkAPI.rejectWithValue(message)
     }
 })
@@ -150,6 +149,8 @@ export const authSlice = createSlice({
               })
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.state = 'succeeded'
+                state.user = action.payload.user
+                state.success = action.payload.message
                 state.users = state.users.map(user => {
                     if (user._id === action.payload._id) {
                     return action.payload;

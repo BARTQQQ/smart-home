@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../features/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import Error from "../../components/Error/Error";
 // import ReactLoading from "react-loading";
 
@@ -20,6 +20,7 @@ function Login() {
   const { user, state, error } = useSelector((state) => state.auth);
   // console.log(state, displayError);
   useEffect(() => {
+    dispatch(reset());
     if (state === "error") {
       setDisplayError(true);
     }

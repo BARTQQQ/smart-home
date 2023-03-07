@@ -6,6 +6,7 @@ const createDevice = async (req, res) => {
 
     try {
         const { gpio, name, dusk } = req.body
+        console.log(dusk)
     
         const deviceGpio = await Device.findOne({gpio})
     
@@ -37,7 +38,7 @@ const deleteDevice = async (req, res) => {
     
       await device.remove()
     
-      res.status(200).json('Pomyślnie usunięto')
+      res.status(200).json({id: req.params.id})
     } catch(error) {
       return res.json(error.message)
     }

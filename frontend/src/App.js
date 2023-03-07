@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import Navbar from "../src/components/Navbar/Navbar";
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
-import Profile from './pages/Profile/Profile'
 import Settings from './pages/Settings/Settings'
 import ReactLoading from 'react-loading';
 import WeatherForm from "./components/Forms/WeatherForm";
@@ -18,10 +17,11 @@ import CreateUserForm from "./components/Forms/CreateUserForm";
 import DeleteUserForm from "./components/Forms/DeleteUserForm";
 import './style.css'
 import VerfiyEmail from "./pages/VerifyEmail/VerfiyEmail";
+import UpdateUserFrom from "./components/Forms/UpdateUserFrom";
 
 function App() {
   const { state } = useSelector((state) => state.auth);
-  console.log(state)
+  // console.log(state)
   // pobiera obecna lokalizacje
   // const successCallback = (position) => {
   //   console.log(position);
@@ -42,7 +42,7 @@ function App() {
             <Route path="/opcje/ustawienia/dodaj-uzytkownika" element={<><Navbar /><CreateUserForm/></>}/>
             <Route path="/opcje/ustawienia/usun-uzytkownika" element={<><Navbar /><DeleteUserForm/></>}/>
             <Route path="/opcje/ustawienia/usun" element={<><Navbar /><DeleteDeviceForm/></>}/>
-            <Route path="/opcje/profil/nazwa" element={<><Navbar /><Profile/></>}/>
+            <Route path="/opcje/profil/nazwa" element={<><Navbar /><UpdateUserFrom/></>}/>
             <Route path="/weryfikacja/:nickname/:token" element={<VerfiyEmail/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="*" element={<NotFound/>}/>

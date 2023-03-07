@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 ::-webkit-scrollbar {
-  width: 1px;
+  width: 0px;
 }
 
 * {
@@ -31,6 +31,9 @@ div, h1, h2, h3, a, p, span, label, input, button, textarea, ::before, ::after {
 }
 
 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1em;
   background: rgba(255, 255, 255, 0.1);
   color: #747083;
@@ -43,6 +46,91 @@ button {
 button:hover {
   background-color: white;
   color: #060b19;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.list table {
+  display: flex;
+  flex-direction: column;
+  border-collapse: collapse;
+}
+
+.list table thead {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.list table tr {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list table tr td {
+  padding: 1rem .3rem;
+  overflow-wrap: break-word;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list table .name,
+.list table .surrname,
+.list table .nickname,
+.list table .room {
+  width: 8rem;
+}
+
+.list table .email {
+  width: 14rem;
+}
+
+.list table .created,
+.list table .updated {
+  width: 10rem;
+}
+
+.list table .option {
+  width: 4rem;
+}
+
+.list table .option button {
+  width: 100%;
+}
+
+.list table .pin {
+  width: 3rem;
+}
+
+.list table .verify,
+.list table .dusk,
+.list table .state {
+  width: 3.4rem;
+}
+
+.list table .verify span,
+.list table .dusk span,
+.list table .state span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list table .verify .yes svg,
+.list table .dusk .yes svg,
+.list table .state .yes svg {
+  fill: #44871e;
+}
+
+.list table .verify .no svg,
+.list table .dusk .no svg,
+.list table .state .no svg {
+  fill: #ef4444;
+}
+
+.list table .dusk {
+  width: 6rem;
 }
 
 .user-login,
@@ -152,13 +240,14 @@ button:hover {
 .form-layout form {
   max-width: 600px;
   display: flex;
-  margin: .5em 0 2em 0;
+  margin: 0.5em 0 2em 0;
+  /* justify-content: center; */
   flex-wrap: wrap;
   align-content: space-between;
 }
 
 .form-layout form label[data-type="name"],
-.form-layout form label[data-type="surrname"] {
+.form-layout form label[data-type="surname"] {
   width: 50% !important;
 }
 
@@ -178,7 +267,24 @@ button:hover {
 
 .form-layout form label p {
   font-size: 1em;
-  margin-bottom: .2em;
+  margin-bottom: 0.2em;
+}
+
+.form-layout form label span {
+  display: flex;
+}
+
+.form-layout form label span input[type="checkbox"] {
+  padding: 1rem;
+  margin-right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.7;
+}
+
+.form-layout form label input:focus + p,
+.form-layout form label span input:checked + p {
+  color: white;
 }
 
 .form-layout form label input {
@@ -193,6 +299,7 @@ button:hover {
 .form-layout form label input:focus {
   color: white;
   border-color: white;
+  opacity: 1;
 }
 
 .form-layout form label input:focus + p {
@@ -356,21 +463,44 @@ button:hover {
 }
 
 @media screen and (max-width: 992px) {
+  body {
+    overflow: initial;
+  }
+  .settings-layout .forms .form-links {
+    align-items: center;
+    justify-content: center;
+  }
   main {
     display: grid;
     grid-template-columns: 0;
     grid-template-rows: repeat(3, 1fr);
+    grid-auto-rows: max-content;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
+  main .things {
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100vw;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
   main .things-details {
-    grid-area: 1 / 1 / 2 / 3;
+    grid-area: 2 / 1 / 3 / 3;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  main .event-wrapper {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  main .event-wrapper .all-events {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
 @media screen and (max-width: 980px) {
   main .event-wrapper {
-    grid-area: 2 / 1 / 3 / 3;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: grid;
     grid-template-columns: 1fr;

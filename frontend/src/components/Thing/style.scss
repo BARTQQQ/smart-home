@@ -1,0 +1,98 @@
+
+//colors
+$background-color: rgb(6, 11, 25);
+$border-color: rgba(255, 255, 255, 0.1);
+$white: rgb(255, 255, 255);
+$font-color: rgb(116, 112, 131);
+$highlight-color: rgb(126, 87, 194);
+$yt-color: rgb(229, 57, 53);
+$red: rgb(239,68,68);
+$red-hover: rgba(239, 68, 68, 0.7);
+$green: rgb(68, 135, 30);
+$green-hover: rgba(82, 161, 35, 0.7);
+
+//variables
+$opacity: .8;
+$time: .3s;
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: .3rem;
+    margin: 1rem;
+    width: 7em;
+    height: 7em;
+    background: $border-color;
+    border: 1px solid $border-color;
+    opacity: .8;
+    transition: $time;
+    cursor: pointer;
+
+    svg {
+        transition: $time;
+    }
+
+    .icon {
+        svg {
+            width: 2.5em;
+            height: 2.5em;
+        }
+
+        .off {
+            svg {
+                fill: $background-color
+            }
+        }
+
+        .on {
+            svg {
+                fill: $white
+            }
+        }
+
+
+    }
+
+    &:hover {
+        box-shadow: inset 0px 0px 24px -15px rgba(255, 255, 255, 1);
+    }
+
+    .details {
+        p {
+            text-transform: capitalize;
+            text-align: center;
+            font-size: .8rem;
+        }
+    }
+
+    .state {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        svg {
+            width: 1.5em;
+            height: 1.5em;
+        }
+
+        .off {
+            svg {
+                fill: $background-color
+            }
+        }
+
+        .on {
+            svg {
+                fill: $white
+            }
+        }
+    }
+}
+
+.box-on {
+    box-shadow: inset 0px 0px 24px -15px rgba(255, 255, 255, 1);
+
+}

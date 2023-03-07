@@ -73,3 +73,43 @@ nav {
     }
 }
 
+@media screen and (max-width: 992px) {
+    nav {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        width: 100vw;
+        min-height: 25vh;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: none;
+
+        .user,
+        .date-weather {
+            padding: 1em;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .user {
+            grid-area: 1 / 1 / 2 / 2;
+            width: 100%;
+        }
+
+        .date-weather {
+            grid-area: 1 / 2 / 2 / 5;
+        }
+
+        .settings {
+            grid-area: 2 / 1 / 3 / 4;
+        }
+
+        .logout {
+            grid-area: 2 / 4 / 3 / 5;
+        }
+    }
+}
+
+@media screen and (max-height: 700px){
+    nav {
+        min-height: 200px;
+    }
+}
+

@@ -13,8 +13,6 @@ const getEvents = async (req, res) => {
 const createEvent = async (req, res) => {
     const {date, contents} = req.body
 
-    console.log(req.user)
-
     const userID = req.user.id.toString()
     const userNickname = req.user.nickname.toString()
     

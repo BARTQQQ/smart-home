@@ -10,6 +10,7 @@ main {
 
 main .things {
   grid-area: 1 / 1 / 3 / 2;
+  display: flex;
 }
 
 main .things-details {

@@ -60,8 +60,10 @@ const loginUser = async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       // User is valid, generate a JSON Web Token and send it in the response
       res.json({
+        id: user.id,
         name: user.name,
         surname: user.surname,
+        email: user.email,
         nickname: user.nickname,
         token: generateTokenLogin(user._id),
       });
@@ -88,11 +90,27 @@ const updateUser = async (req, res) => {
     const { name, surname, nickname, password, email } = req.body
 
     // Find the user with the given ID
-    const user = await User.findById(id)
+    const user = await User.findById(id).select('-password')
 
     // If the user is not found, return an error
     if (!user) {
       return res.status(404).json({ message: 'Nie znaleziono użytkownika' })
+    }
+
+    if( user.nickname === nickname ) {
+      return res.status(400).json({ errors: 'Nazwa konta jest zajęta'})
+    }
+
+    if( user.email === email ) {
+      return res.status(400).json({ errors: 'Podany email jest zajęty'})
+    }
+
+    if( user.nickname === "admin"){
+      return res.status(400).json({ errors: 'Nie można ustawić takiej nazwy konta!'})
+    }
+
+    if( user.email === "admin"){
+      return res.status(400).json({ errors: 'Nie można ustawić takiego email!'})
     }
 
     // Update the user's details
@@ -105,7 +123,14 @@ const updateUser = async (req, res) => {
     user.email = email || user.email
     await user.save()
 
-    res.json({ message: 'Konto zostało pomyślnie zaktualizowane', user })
+    res.json({ message: 'Konto zostało pomyślnie zaktualizowane', user: {
+        id: user.id,
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        nickname: user.nickname,
+        token: generateTokenLogin(user._id),
+    } })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
@@ -122,6 +147,7 @@ const getUsers = async (req, res) => {
     const users = await User.find().select('-password')
     return res.status(200).json(users)
   } catch (error) {
+    console.log(error)
     return res.json(error.message)
   }
 }
@@ -136,7 +162,7 @@ const deleteUser = async (req, res) => {
   
     await user.remove()
   
-    res.status(200).json('Pomyślnie usunięto')
+    res.status(200).json({id: req.params.id})
   } catch(error) {
     return res.json(error.message)
   }
