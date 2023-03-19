@@ -18,20 +18,11 @@ import DeleteUserForm from "./components/Forms/DeleteUserForm";
 import './style.css'
 import VerfiyEmail from "./pages/VerifyEmail/VerfiyEmail";
 import UpdateUserFrom from "./components/Forms/UpdateUserFrom";
+import { io } from "socket.io-client";
 
 function App() {
   const { state } = useSelector((state) => state.auth);
-  // console.log(state)
-  // pobiera obecna lokalizacje
-  // const successCallback = (position) => {
-  //   console.log(position);
-  // };
-  
-  // const errorCallback = (error) => {
-  //   console.log(error);
-  // };
-  // console.log(navigator.geolocation.watchPosition(successCallback, errorCallback))
-  // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+ 
   return (
     <Router>
         <Routes>
@@ -52,4 +43,16 @@ function App() {
   );
 }
 
+export const socket = io("ws://192.168.0.115:4001", {
+  reconnection: true,
+  reconnectionAttempts: 5
+});
+
+socket.on("connect", () => {
+  console.log("WebSocket connected");
+});
+
+socket.on("disconnect", (reason) => {
+  console.log("WebSocket disconnected:", reason);
+});
 export default App;

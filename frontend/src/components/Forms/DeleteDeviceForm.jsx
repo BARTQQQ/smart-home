@@ -22,7 +22,7 @@ function DeleteDeviceForm() {
           <tr>
             <td className='pin'>Pin GPIO</td>
             <td className='room'>Pomieszczenie</td>
-            <td className='dusk'>Czujnik zmierzchu</td>
+            <td className='type'>Typ</td>
             <td className='state'>Stan</td>
             <td className='option'>Opcja</td>
           </tr>
@@ -33,16 +33,14 @@ function DeleteDeviceForm() {
               <td className='pin'>{device.gpio}</td>
               <td className='room'>{device.name}</td>
 
-              <td className='dusk'>
-                {device.dusk ? (
-                  <span className='yes'>
-                    <GoCheck />
-                  </span>
-                ) : (
-                  <span className='no'>
-                    <GoX />
-                  </span>
-                )}
+              <td className='type'>
+                {device.type === "dusk"
+                  ? "Reakcja na światło"
+                  : device.type === "led"
+                  ? "Led"
+                  : device.type === "servo"
+                  ? "Serwo"
+                  : ""}
               </td>
               <td className='state'>
                 {device.state ? (

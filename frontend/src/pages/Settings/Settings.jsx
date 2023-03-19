@@ -30,7 +30,7 @@ function Settings() {
               </span>
               <span className='link-to-form'>
                 <Link to='/opcje/ustawienia/usun-uzytkownika'>
-                  Usuń użytkownika
+                  Zarządzanie użytkownikami
                   <MdPersonRemove />
                 </Link>
               </span>
@@ -42,7 +42,7 @@ function Settings() {
               </span>
               <span className='link-to-form'>
                 <Link to='/opcje/ustawienia/usun'>
-                  Usuń
+                  Zarządzanie urządzeniami
                   <TbLampOff />
                 </Link>
               </span>

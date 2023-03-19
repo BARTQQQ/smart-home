@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
 import { getWeather } from "../../features/weather/weatherSlice";
 import { getCity } from "../../features/city/citySlice";
 import {
@@ -17,7 +17,7 @@ import "./weather.css";
 function Weather() {
   const dispatch = useDispatch();
 
-  const { data, error, status } = useSelector((state) => state.weather);
+  const { data, status } = useSelector((state) => state.weather);
   const { city } = useSelector((state) => state.city);
 
   const [weatherIcon, setWeatherIcon] = useState("");

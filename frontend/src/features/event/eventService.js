@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import api from '../../proxies'
+import { socket } from '../../App';
 
 const API_URL = '/api/event/'
 
@@ -22,6 +22,7 @@ const createEvent = async (data, token) => {
     }
 
     const response = await axios.post(API_URL, data, config)
+    socket.emit("sendEvent", response.data )
     return response.data
 }
 
@@ -33,6 +34,7 @@ const deleteEvent = async (id, token) => {
     }
 
     const response = await axios.delete(API_URL + id, config)
+    socket.emit("deleteEvent", id);
     return response.data
 }
 

@@ -1,7 +1,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import authService from './authService'
+import jwt_decode from "jwt-decode"
 
 const user = JSON.parse(localStorage.getItem('user'))
+
+if(user) {
+    const { exp } = jwt_decode(user.token)
+    const expirationTime = (exp * 1000) - 60000
+    if (Date.now() >= expirationTime) {
+        localStorage.clear();
+    }
+}
 
 const initialState = {
     user: user ? user : null,

@@ -11,16 +11,15 @@ function DeviceForm() {
 
   const [displayError, setDisplayError] = useState(false);
   const [displaySuccess, setDisplaySuccess] = useState(false);
-  const [checked, setChecked] = useState(false);
   const [message, setMessage] = useState("");
 
   const [formData, setFormData] = useState({
     gpio: "",
     name: "",
-    dusk: checked,
+    type: "",
   });
 
-  const { gpio, name, dusk } = formData;
+  const { gpio, name, type } = formData;
 
   useEffect(() => {
     dispatch(reset());
@@ -40,8 +39,8 @@ function DeviceForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (!gpio || !name) {
+    console.log(formData);
+    if (!gpio || !name || !type) {
       setDisplaySuccess(false);
       setMessage(<div>Wypełnij wszystkie pola</div>);
       setDisplayError(true);
@@ -49,7 +48,7 @@ function DeviceForm() {
       const deviceData = {
         gpio,
         name,
-        dusk,
+        type,
       };
       dispatch(createDevice(deviceData));
     }
@@ -59,14 +58,6 @@ function DeviceForm() {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleChange = () => {
-    setChecked(!checked);
-    setFormData((prevState) => ({
-      ...prevState,
-      dusk: !checked,
     }));
   };
 
@@ -81,7 +72,7 @@ function DeviceForm() {
   return (
     <section className='form-layout'>
       <div className='forms'>
-        <h2>Nowe urządzenie (włącz/wyłącz)</h2>
+        <h2>Nowe urządzenie</h2>
         <form onSubmit={onSubmit}>
           <label htmlFor='gpio'>
             <input
@@ -105,18 +96,16 @@ function DeviceForm() {
             />
             <p>Podaj nazwe urządzenia</p>
           </label>
-          <label htmlFor='dusk'>
-            <span>
-              <input
-                type='checkbox'
-                id='dusk'
-                name='dusk'
-                value={dusk}
-                onChange={handleChange}
-              />
-              <p>{checked ? "Tak" : "Nie"}</p>
-            </span>
-            <p>Reakcja na czujnik zmierzchu</p>
+          <label htmlFor='type'>
+            <select value={type} name='type' onChange={onChange}>
+              <option value='' disabled hidden>
+                Wybierz typ
+              </option>
+              <option value='led'>Led</option>
+              <option value='dusk'>Led z reakcją na światło</option>
+              <option value='servo'>Serwo</option>
+            </select>
+            <p>Typ</p>
           </label>
           <Error message={message} display={displayError} onClose={onError} />
           <Success

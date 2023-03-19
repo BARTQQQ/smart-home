@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getEvents } from "../../features/event/eventSlice";
 import { getDevices } from "../../features/device/deviceSlice";
 import Events from "../../components/Events/Events";
-// import GroupedEvents from "../../components/Events/GroupedEvents/GroupedEvents";
 import Event from "../../components/Events/Event/Event";
-
+import ChartTemperature from "../../components/ChartComponent/ChartTemperature";
+import ChartHumidity from "../../components/ChartComponent/ChartHumidity";
 import ReactLoading from "react-loading";
-
 import "./dashboard.css";
 import Thing from "../../components/Thing/Thing";
 
@@ -17,7 +16,38 @@ function Dashboard() {
   const { events, state } = useSelector((state) => state.event);
   const { devices } = useSelector((state) => state.device);
   const [sortOrder, setSortOrder] = useState("desc");
-  console.log(devices);
+  const { temp, humidity } = useSelector((state) => state.device);
+  const [t, setT] = useState(null);
+  const [h, setH] = useState(null);
+
+  let avgT = 0;
+  let avgH = 0;
+
+  if (temp && temp.length > 0) {
+    for (let i = 0; i < temp.length; i++) {
+      avgT += temp[i].temp;
+    }
+    avgT = avgT / temp.length;
+    avgT = Number(avgT.toFixed(2));
+  }
+
+  if (humidity && humidity.length > 0) {
+    for (let i = 0; i < humidity.length; i++) {
+      avgH += humidity[i].humidity;
+    }
+    avgH = avgH / humidity.length;
+    avgH = Number(avgH.toFixed(2));
+  }
+
+  useEffect(() => {
+    if (temp && temp.length > 0) {
+      setT(avgT);
+    }
+
+    if (humidity && humidity.length > 0) {
+      setH(avgH);
+    }
+  }, [temp, humidity, avgH, avgT]);
 
   const sortedEvents = [...events].sort((a, b) => {
     const dateA = new Date(a.date.split(".").reverse().join("-"));
@@ -58,14 +88,31 @@ function Dashboard() {
         {devices.map((device) => (
           <Thing
             key={device._id}
-            dusk={device.dusk}
+            gpio={device.gpio}
+            type={device.type}
             name={device.name}
             state={device.state}
           />
         ))}
       </section>
       <aside className='things-details'>
-        <h2>Details</h2>
+        <div className='chart'>
+          <ChartTemperature />
+          <ChartHumidity />
+        </div>
+        <div className='stats'>
+          <span className='stats-header'>
+            <h2>Średnie odczyty czujników z ostatnich 12h</h2>
+          </span>
+          <div className='temp'>
+            <h3>Temperatura</h3>
+            <p>{t}°C</p>
+          </div>
+          <div className='humidity'>
+            <h3>Wilgotność</h3>
+            <p>{h}%</p>
+          </div>
+        </div>
       </aside>
       <aside className='event-wrapper'>
         <Events data={events} />

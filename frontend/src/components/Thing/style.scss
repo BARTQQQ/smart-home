@@ -15,6 +15,10 @@ $green-hover: rgba(82, 161, 35, 0.7);
 $opacity: .8;
 $time: .3s;
 
+.dusk {
+    box-shadow: initial !important;
+}
+
 .box {
     display: flex;
     flex-direction: column;
@@ -24,7 +28,7 @@ $time: .3s;
     margin: 1rem;
     width: 7em;
     height: 7em;
-    background: $border-color;
+    background: $border-color !important;
     border: 1px solid $border-color;
     opacity: .8;
     transition: $time;
@@ -56,6 +60,7 @@ $time: .3s;
     }
 
     &:hover {
+        background: initial;
         box-shadow: inset 0px 0px 24px -15px rgba(255, 255, 255, 1);
     }
 

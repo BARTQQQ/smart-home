@@ -47,6 +47,10 @@ nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .clock {
+            margin-right: 1em;
+        }
     }
 
     .user,
@@ -78,9 +82,10 @@ nav {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, 1fr);
         width: 100vw;
-        min-height: 25vh;
+        min-height: 18vh;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-left: none;
+        font-size: .8em;
 
         .user,
         .date-weather {

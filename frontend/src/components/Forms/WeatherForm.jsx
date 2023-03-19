@@ -11,7 +11,7 @@ function WeatherForm() {
 
   useEffect(() => {
     dispatch(getCity());
-  }, []);
+  }, [dispatch]);
 
   const { status } = useSelector((state) => state.weather);
   const { city } = useSelector((state) => state.city);
