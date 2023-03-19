@@ -48,6 +48,10 @@ nav .date-weather {
   align-items: center;
 }
 
+nav .date-weather .clock {
+  margin-right: 1em;
+}
+
 nav .user,
 nav .date-weather {
   justify-self: start;
@@ -74,9 +78,10 @@ nav .settings .container {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     width: 100vw;
-    min-height: 25vh;
+    min-height: 18vh;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: none;
+    font-size: .8em;
   }
   nav .user,
   nav .date-weather {

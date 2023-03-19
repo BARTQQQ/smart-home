@@ -26,6 +26,36 @@ const createDevice = async (deviceData, token) => {
     return response.data
 }
 
+const setState = async (data, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+    const response = await axios.post(API_URL + '/set', data, config)
+    return response.data
+}
+
+const getTemp = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+    const response = await axios.get(API_URL + '/temp', config)
+    return response.data
+}
+
+const getHum = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+    const response = await axios.get(API_URL + '/humidity', config)
+    return response.data
+}
+
 const deleteDevice = async (id, token) => {
     const config = {
         headers: {
@@ -38,6 +68,6 @@ const deleteDevice = async (id, token) => {
     return response.data
 }
 
-const deviceService = {getDevices, createDevice, deleteDevice}
+const deviceService = {setState, getDevices, createDevice, deleteDevice, getTemp, getHum}
 
 export default deviceService

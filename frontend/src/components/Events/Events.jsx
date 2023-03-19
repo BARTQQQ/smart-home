@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoChevronLeft, GoChevronRight, GoPin } from "react-icons/go";
-import { createEvent } from "../../features/event/eventSlice";
+import { createEvent, addEvent } from "../../features/event/eventSlice";
 import ReactLoading from "react-loading";
 import Event from "./Event/Event";
-import "./events.css";
+import { socket } from "../../App";
 
-// import { useSelector, useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import "./events.css";
 
 function Events() {
   const dispatch = useDispatch();
@@ -16,6 +15,19 @@ function Events() {
 
   const [contents, setContents] = useState("");
   const [current, setCurrent] = useState(new Date());
+
+  useEffect(() => {
+    const handleBroadcastEvent = (eventData) => {
+      console.log("Received eventData:", eventData);
+      dispatch(addEvent(eventData));
+    };
+
+    socket.on("broadcastEvent", handleBroadcastEvent);
+
+    return () => {
+      socket.off("broadcastEvent", handleBroadcastEvent);
+    };
+  }, [dispatch]);
 
   const date = current.toLocaleDateString("default", {
     year: "numeric",
@@ -98,6 +110,7 @@ function Events() {
               if (event.date.toString() === date) {
                 return <Event key={id} data={event} />;
               }
+              return null;
             })
           ) : (
             <div className='empty'>Brak notatek na dzisiaj</div>

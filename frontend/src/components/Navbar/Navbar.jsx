@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { GoHome, GoPerson, GoSettings, GoSignOut } from "react-icons/go";
+import { GoHome, GoSettings, GoSignOut } from "react-icons/go";
 import { logout } from "../../features/auth/authSlice";
 import Clock from "../Clock/Clock";
 import Weather from "../Weather/Weather";
