@@ -1,5 +1,6 @@
 const dotenv = require("dotenv")
 const nodemailer = require("nodemailer")
+const User = require('../models/user.model')
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -24,4 +25,22 @@ const verifyEmail = async (email, nickname, token) => {
     }
 }
 
-module.exports = { verifyEmail }
+const notifyHighTemp = async (temp, humidity) => {
+    try {
+        const users = await User.find().select('-password')
+
+        for(let i = 0; i < users.length; i++) {
+            await transporter.sendMail({
+                from: "DOM",
+                to: users[i].email,
+                subject: `Wysoka temperatura w domu ${temp}°C`,
+                html: `<p>Temperatura: ${temp}°C</p><p>Wilgotność: ${humidity}%</p>`,
+            })
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = { verifyEmail, notifyHighTemp }

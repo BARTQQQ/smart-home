@@ -15,6 +15,9 @@ const deviceSchema = new Schema({
         type: Boolean,
         default: false
     },
+    type: {
+        type: String
+    },
     state: {
         type: Boolean,
         default: false

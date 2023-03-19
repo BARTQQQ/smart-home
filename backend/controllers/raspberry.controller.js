@@ -1,55 +1,115 @@
-// const Gpio = require('onoff').Gpio
-// const i2c = require('i2c-bus');
+const Gpio = require('pigpio').Gpio;
+const i2c = require('i2c-bus');
+const Temp = require('../models/temperature.model')
+const Humidity = require('../models/humidity.model')
+const Device = require('../models/device.model')
+const dht11 = require('node-dht-sensor');
+const {notifyHighTemp} = require('../services/email.service')
 
-// //0x40 fotorezystor
-// //0x41 temperatura
-// //0x42 potencjometr
+//0x40 fotorezystor
+//0x41 temperatura
+//0x42 potencjometr
 
-// // i2c settings
-// const busNubmer = 1;
-// const PCF8591T_ADDRESS = 0x48;
+// i2c settings
+const busNubmer = 1;
+const PCF8591T_ADDRESS = 0x48;
 
-// const i2c1 = i2c.openSync(busNubmer);
+const i2c1 = i2c.openSync(busNubmer);
 
-// const toggleLED = async (req, res) => {
-// 	try {
-// 		const {pin} = req.body
+let lastEmitTime = 0
+let lastNotifyTime = 0
+let lastSaveTime = 0
 
-// 		const LED = new Gpio(pin, 'input');
-// 		const currentValue = LED.readSync();
+const toggleLED = (pin) => {
+  try {
+    const LED = new Gpio(pin, { mode: Gpio.OUTPUT });
+    const currentValue = LED.digitalRead();
 
-// 		LED.writeSync(currentValue === 0 ? 1 : 0);
-		
-// 		return res.status(200).json({ succeed: [LED.readSync() === 1 ? "wlaczone" : "wylaczone"] });
-// 	} catch(err){
-// 		console.log(err)
-// 	}
-// }
+    LED.digitalWrite(currentValue === 0 ? 1 : 0);
+  } catch(err) {
+    console.log(err)
+  }
+}
 
-// const tempSensor = async (req, res) => {
-// 			//i2c1.writeByteSync(PCF8591T_ADDRESS, 0x41, 0x00);
-// 			const value = i2c1.readByteSync(PCF8591T_ADDRESS, 0x40);
-			
-// 			const tempC = (-value + 420) / 10;
-// 			const tempF = tempC * 1.8 + 32
-			
-// 			console.log(`C: ${tempC}, F: ${tempF}`)
-// 			return res.status(200).json(tempC)
-// }
+const toggleServo = (pin, state) => {
+  try {
+	const motor = new Gpio(pin, {mode: Gpio.OUTPUT});
 
-// const duskSensor = async (req, res) => {
-// 	const {pin} = req.body
-// 	const value = i2c1.readByteSync(PCF8591T_ADDRESS, 0x40);
-// 	const LED = new Gpio(pin, 'input');
-// 	const currentValue = LED.readSync();	
-	
-// 	if(value > 210) {
-// 		LED.writeSync(1);
-// 		return res.status(200).json('ciemno')
-// 	} else {
-// 		LED.writeSync(0);
-// 		return res.status(200).json('jasno')
-// 	}
-// }
+    let pulseWidth = 1000;
 
-// module.exports = {toggleLED, tempSensor, duskSensor}
+    if (state) {
+      pulseWidth = 1000;
+    } else {
+      pulseWidth = 2000;
+    }
+    motor.servoWrite(pulseWidth);
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+const tempSensor = async (io) => {
+  const now = Date.now()
+
+  if (now - lastEmitTime >= 10000) { // check every 10sec
+    lastEmitTime = now
+
+    const value = dht11.read(11, 17)
+
+    const humidity = value.humidity
+    const tempC = value.temperature
+
+    console.log(`C: ${tempC}, H: ${humidity}`)
+
+    if (tempC > 30) {
+      if (now - lastNotifyTime >= 60000) { // send notify every minute
+        lastNotifyTime = now
+        notifyHighTemp(tempC, humidity)
+      }
+    }
+
+    if (now - lastSaveTime >= 1800000) { // save data every 30 minutes 
+      lastSaveTime = now
+
+      const temperature = new Temp({ temp: tempC })
+      const hum = new Humidity({ humidity: humidity })
+
+      io.emit('temp', temperature)
+      io.emit('humidity', hum)
+      await temperature.save()
+      await hum.save()
+    }
+  }
+
+  await Temp.deleteMany({ createdAt: { $lt: now - 172800000 } })
+  await Humidity.deleteMany({ createdAt: { $lt: now - 172800000 } })
+}
+
+const duskSensor = async (io) => {
+  try {
+    const duskLeds = await Device.find({type: "dusk"})
+
+    for(let i = 0; duskLeds.length > i; i++){
+      const value = i2c1.readByteSync(PCF8591T_ADDRESS, 0x40);
+      const LED = new Gpio(duskLeds[i].gpio, { mode: Gpio.OUTPUT });
+      const currentValue = LED.digitalRead();  
+
+      if(value > 210) {
+        LED.digitalWrite(0);
+        duskLeds[i].state = true
+      } else {
+        LED.digitalWrite(1);
+        duskLeds[i].state = false
+      }
+    }
+    
+    for (let i = 0; i < duskLeds.length; i++) {
+      io.emit('dusk', duskLeds[i])
+      await duskLeds[i].save()
+    }
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+module.exports = {toggleLED, tempSensor, duskSensor, toggleServo}
